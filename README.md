@@ -18,16 +18,21 @@ This Streamlit-based tool provides a user-friendly interface for checking HTTP s
    git clone https://github.com/devenderkg/http-status-code-checker.git
 Navigate to the project directory:
 
-cd streamlit-http-checker
-Install dependencies:
+   ```bash
+   cd streamlit-http-checker
 
-pip install -r requirements.txt
+2. Install dependencies:
 
-Usage:
+   ```bash
+   pip install -r requirements.txt
 
-Run the Streamlit app:
+3. Usage:
 
-streamlit run app.py
+   ```bash
+   Run the Streamlit app:
+
+   ```bash
+   streamlit run app.py
 Open your web browser and navigate to the provided URL (usually http://localhost:8501). You'll be greeted with a user-friendly interface to enter the URL and check the HTTP status code.
 
 Screenshots
