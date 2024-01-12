@@ -33,4 +33,4 @@ Open your web browser and navigate to the provided URL (usually http://localhost
 
 ## Screenshots
 Include screenshots of your Streamlit app to showcase its appearance and functionality.
-!(https://i.imgur.com/Rk9SOcU.jpeg)
+<img src="https://i.imgur.com/Rk9SOcU.jpeg">
