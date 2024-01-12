@@ -18,7 +18,7 @@ def check_url(url):
 def about_section():
     st.sidebar.subheader("About")
     st.sidebar.markdown(
-        "Verify the HTTP status codes and redirects for a maximum of 25 URLs to determine their accessibility. Obtain the HTTP status code for each valid URL using this tool for bulk checking. If a URL returns an HTTP status code of 301 or 302, the tool will also capture the redirection URL. This online tool offers a free check for HTTP status codes."
+        "Verify the HTTP status codes and redirects for a maximum of 200 URLs to determine their accessibility. Obtain the HTTP status code for each valid URL using this tool for bulk checking. If a URL returns an HTTP status code of 301 or 302, the tool will also capture the redirection URL. This online tool offers a free check for HTTP status codes."
     )
 
 def explore_apps_section():
