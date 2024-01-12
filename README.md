@@ -33,4 +33,4 @@ Open your web browser and navigate to the provided URL (usually http://localhost
 
 ## Screenshots
 Include screenshots of your Streamlit app to showcase its appearance and functionality.
-!(https://raw.githubusercontent.com/devenderkg/http-status-code-checker/main/Web%20capture_12-1-2024_172112_http-status-code-checker.streamlit.app.jpeg)
+!(https://i.imgur.com/Rk9SOcU.jpeg)
