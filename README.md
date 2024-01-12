@@ -2,38 +2,34 @@
 
 ## Overview
 
-This Streamlit-based tool provides a user-friendly interface for checking HTTP status codes and following redirects for a given URL. It's designed to be simple to use, making it accessible for both developers and non-developers to monitor and debug web applications.
+This tool is built on [Streamlit](https://streamlit.io/), providing a user-friendly interface for checking HTTP status codes and following redirects for a given URL. It aims to be straightforward, making it accessible for both developers and non-developers to monitor and debug web applications.
 
 ## Features
 
-- Interactive web interface for easy URL checking.
-- Displays HTTP status codes and follows redirects.
-- User-friendly and suitable for non-technical users.
+- **Interactive Web Interface:** Easily check URLs with a user-friendly interface.
+- **HTTP Status Codes Display:** View HTTP status codes for the specified URL.
+- **Redirects Handling:** Automatically follow redirects and display the final status code.
+- **User-Friendly:** Designed to be accessible to non-technical users.
 
 ## Installation
 
-1. Clone the repository:
+1. **Clone the Repository:**
 
    ```bash
    git clone https://github.com/devenderkg/http-status-code-checker.git
-Navigate to the project directory:
+
+2. **Clone the Repository:**
 
    ```bash
    cd streamlit-http-checker
-
-2. Install dependencies:
-
-   ```bash
    pip install -r requirements.txt
 
-3. Usage:
-
-   ```bash
-   Run the Streamlit app:
+3. **Usage:** Run the Streamlit app:
 
    ```bash
    streamlit run app.py
+
 Open your web browser and navigate to the provided URL (usually http://localhost:8501). You'll be greeted with a user-friendly interface to enter the URL and check the HTTP status code.
 
-Screenshots
+## Screenshots
 Include screenshots of your Streamlit app to showcase its appearance and functionality.
