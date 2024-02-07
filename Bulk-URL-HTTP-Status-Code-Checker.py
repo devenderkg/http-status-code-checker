@@ -24,7 +24,7 @@ def about_section():
 def explore_apps_section():
     st.sidebar.markdown("🌐 **Explore Our Web Apps!**")
     st.sidebar.markdown("Discover more of our handy tools for you:")
-    st.sidebar.markdown("[Online Compass](https://myspeedometer.online)")
+    st.sidebar.markdown("[Online Compass](https://myonlinecompass.online/)")
     st.sidebar.markdown("[My Elevation](https://whatismyelevation.pro/)")
 
 def support_section():
