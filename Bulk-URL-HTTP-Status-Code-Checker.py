@@ -56,11 +56,18 @@ def main():
     if st.button("Check URLs"):
         st.subheader("Results")
 
+        result_data = []
+
         for i, url in enumerate(urls):
             status_code, final_url = check_url(url)
+            result_data.append({
+                "URL": url,
+                "Status Code": status_code,
+                "Final URL": final_url
+            })
 
-            # Display result for each URL
-            st.write(f"URL: {url}, Status Code: {status_code}, Final URL: {final_url}")
+            # Display the updated table
+            st.table(result_data)
 
     # Features section
     st.subheader("Features")
