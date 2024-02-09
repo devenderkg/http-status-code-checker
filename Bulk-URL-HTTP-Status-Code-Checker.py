@@ -56,23 +56,11 @@ def main():
     if st.button("Check URLs"):
         st.subheader("Results")
 
-        result_data = []
-        progress_bar = st.progress(0)  # Initialize progress bar
-
         for i, url in enumerate(urls):
             status_code, final_url = check_url(url)
-            result_data.append({
-                "URL": url,
-                "Status Code": status_code,
-                "Final URL": final_url
-            })
 
-            # Update progress bar
-            progress_percentage = (i + 1) / len(urls) * 100
-            progress_bar.progress(progress_percentage)
-
-        # Display the results in a table
-        st.table(result_data)
+            # Display result for each URL
+            st.write(f"URL: {url}, Status Code: {status_code}, Final URL: {final_url}")
 
     # Features section
     st.subheader("Features")
