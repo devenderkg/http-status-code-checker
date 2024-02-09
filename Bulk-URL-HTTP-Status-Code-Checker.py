@@ -2,8 +2,6 @@ import streamlit as st
 import requests
 import pandas as pd
 
-
-
 st.set_page_config(page_title="Bulk URL HTTP Status Code & Redirect Checker | AdFree")
 
 def check_url(url):
@@ -48,7 +46,7 @@ def main():
     else:
         # Allow the user to upload a file with URLs
         uploaded_file = st.file_uploader("Upload a file with URLs (one per line)", type=["txt", "csv"])
-        
+
         if uploaded_file is not None:
             df = pd.read_csv(uploaded_file, header=None, names=["URL"])
             urls = df["URL"].tolist()
@@ -59,14 +57,19 @@ def main():
         st.subheader("Results")
 
         result_data = []
+        progress_bar = st.progress(0)  # Initialize progress bar
 
-        for url in urls:
+        for i, url in enumerate(urls):
             status_code, final_url = check_url(url)
             result_data.append({
                 "URL": url,
                 "Status Code": status_code,
                 "Final URL": final_url
             })
+
+            # Update progress bar
+            progress_percentage = (i + 1) / len(urls) * 100
+            progress_bar.progress(progress_percentage)
 
         # Display the results in a table
         st.table(result_data)
@@ -85,7 +88,6 @@ def main():
         "Check multiple URLs at once! Analyze up to 100 URLs, checking status codes and redirect chains. "
         "The tool defaults to checking HTTP URLs, but you can switch to HTTPS for added security in the settings."
     )
-
 
 if __name__ == "__main__":
     main()
