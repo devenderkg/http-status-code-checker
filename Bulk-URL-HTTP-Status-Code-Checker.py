@@ -53,10 +53,13 @@ def main():
         else:
             urls = []
 
+    result_data = []
+
+    # Display an initial table with headers
+    result_table = st.table(result_data)
+
     if st.button("Check URLs"):
         st.subheader("Results")
-
-        result_data = []
 
         for i, url in enumerate(urls):
             status_code, final_url = check_url(url)
@@ -66,8 +69,8 @@ def main():
                 "Final URL": final_url
             })
 
-            # Display the updated table
-            st.table(result_data)
+            # Update the existing table with the latest data
+            result_table.table(result_data)
 
     # Features section
     st.subheader("Features")
