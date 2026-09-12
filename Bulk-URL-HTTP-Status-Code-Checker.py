@@ -279,6 +279,7 @@ def check_url(url: str, method: str, timeout: float, verify_ssl: bool,
     """Perform the HTTP status / redirect check for a single URL."""
     result = {
         "URL": url,
+        "Initial Status Code": None,
         "Status Code": None,
         "Status Meaning": "",
         "Final URL": "",
@@ -317,8 +318,13 @@ def check_url(url: str, method: str, timeout: float, verify_ssl: bool,
         was_redirected = bool(resp.history) or (
             not follow_redirects and 300 <= resp.status_code < 400
         )
+        # The code returned by the very first request made — e.g. the 301
+        # a URL responds with before it's followed to a final 200. Equal
+        # to "Status Code" whenever there was no redirect.
+        initial_status_code = resp.history[0].status_code if resp.history else resp.status_code
 
         result.update({
+            "Initial Status Code": initial_status_code,
             "Status Code": resp.status_code,
             "Status Meaning": STATUS_MEANINGS.get(resp.status_code, ""),
             "Final URL": resp.url,
@@ -537,6 +543,12 @@ if st.session_state.results:
     # requests) show as blank instead of forcing the whole column to float
     # (which would render "404.0" instead of "404").
     df["Status Code"] = df["Status Code"].astype("Int64")
+    df["Initial Status Code"] = df["Initial Status Code"].astype("Int64")
+    # Put Initial Status Code right after the URL so a redirected URL's
+    # first (e.g. 301) code is visible without reading the chain text.
+    cols = df.columns.tolist()
+    cols.insert(cols.index("URL") + 1, cols.pop(cols.index("Initial Status Code")))
+    df = df[cols]
     meta = st.session_state.last_run_meta
 
     total = len(df)
@@ -587,11 +599,18 @@ if st.session_state.results:
         ]
     filtered = filtered.drop(columns=["_bucket"])
 
+    st.caption(
+        "**Initial Status Code** is the code the URL itself returned "
+        "(e.g. `301`). **Status Code** is the code of the final page after "
+        "any redirects were followed (e.g. `200`). They're equal when a "
+        "URL didn't redirect."
+    )
+
     styler = filtered.style
     if hasattr(styler, "map"):
-        styler = styler.map(style_status, subset=["Status Code"])
+        styler = styler.map(style_status, subset=["Status Code", "Initial Status Code"])
     else:  # older pandas versions
-        styler = styler.applymap(style_status, subset=["Status Code"])
+        styler = styler.applymap(style_status, subset=["Status Code", "Initial Status Code"])
 
     st.dataframe(
         styler,
@@ -608,8 +627,9 @@ if st.session_state.results:
     csv_bytes = filtered.to_csv(index=False).encode("utf-8")
     json_bytes = json.dumps(filtered.to_dict(orient="records"), indent=2, default=str).encode("utf-8")
     txt_lines = "\n".join(
-        f"{row['URL']} -> {row['Status Code']} ({row['Status Meaning']}) "
-        f"final: {row['Final URL']}" for _, row in filtered.iterrows()
+        f"{row['URL']} -> initial: {row['Initial Status Code']}, "
+        f"final: {row['Status Code']} ({row['Status Meaning']}) "
+        f"final URL: {row['Final URL']}" for _, row in filtered.iterrows()
     )
 
     with e1:
